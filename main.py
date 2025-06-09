@@ -1,8 +1,8 @@
 from flask import Flask
 from threading import Thread
-import datetime
 import os
 from telegram import Bot
+import datetime
 
 app = Flask(__name__)
 
@@ -18,8 +18,8 @@ def keep_alive():
     t.start()
 
 def send_daily_message():
-  TOKEN = os.getenv("TELEGRAM_TOKEN")
-CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+    TOKEN = os.getenv("TELEGRAM_TOKEN")
+    CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
     if not TOKEN or not CHAT_ID:
         print("TOKEN veya CHAT_ID eksik!")
@@ -79,19 +79,15 @@ CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
         }
     ]
 
-    msg = f"📊 ZYNTRUM – Günlük Trend Raporu\n📅 {datetime.datetime.now().strftime('%d %B %Y – %H:%M')}\n\n"
+    msg = f"📊 ZYNTRUM – Günlük Trend Raporu (TEST)\n📅 {datetime.datetime.now().strftime('%d %B %Y – %H:%M')}\n\n"
     for p in products:
         msg += f"{p['title']}\n🔸 {p['views']}, {p['likes']}\n🔸 Google Trends: {p['trends']}\n🔸 Amazon: {p['sales']}\n\n"
-
     msg += "🎥 İçerik Fikri: 'Hangisi sizin favoriniz?' başlığıyla carousel Reels paylaş!"
 
     bot.send_message(chat_id=CHAT_ID, text=msg)
+    print("Test mesajı başarıyla gönderildi.")
 
-# Sunucuyu başlat
 keep_alive()
-
-# ŞİMDİLİK TEST GÖNDERİMİ
 send_daily_message()
-
 
 
