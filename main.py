@@ -1,7 +1,6 @@
 from flask import Flask
 from threading import Thread
 import datetime
-import time
 import os
 from telegram import Bot
 
@@ -21,6 +20,10 @@ def keep_alive():
 def send_daily_message():
     TOKEN = os.getenv("TELEGRAM_TOKEN")
     CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+    if not TOKEN or not CHAT_ID:
+        print("TOKEN veya CHAT_ID eksik!")
+        return
+
     bot = Bot(token=TOKEN)
 
     products = [
@@ -81,17 +84,12 @@ def send_daily_message():
 
     msg += "🎥 İçerik Fikri: 'Hangisi sizin favoriniz?' başlığıyla carousel Reels paylaş!"
 
-while True:
-    now = datetime.datetime.now()
-    if now.minute == 8 and now.second == 0:
-        send_daily_message()
-        time.sleep(60)
-    else:
-        time.sleep(20)
+    bot.send_message(chat_id=CHAT_ID, text=msg)
 
+# Sunucuyu başlat
 keep_alive()
-send_daily_message()
-# GÜNLÜK Trend Mesajı Gönderimi
+
+# ŞİMDİLİK TEST GÖNDERİMİ
 send_daily_message()
 
 
