@@ -81,12 +81,7 @@ def send_daily_message():
 
     msg += "🎥 İçerik Fikri: 'Hangisi sizin favoriniz?' başlığıyla carousel Reels paylaş!"
 
-    while True:
-        now = datetime.datetime.now()
-        if now.hour == 8 and now.minute == 0:
-            bot.send_message(chat_id=CHAT_ID, text=msg)
-            time.sleep(60)
-        time.sleep(20)
+  if now.minute % 1 == 0:  # Her dakika test eder
 
 keep_alive()
 send_daily_message()
