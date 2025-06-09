@@ -18,8 +18,9 @@ def keep_alive():
     t.start()
 
 def send_daily_message():
-    TOKEN = os.getenv("TELEGRAM_TOKEN")
-    CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+  TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
     if not TOKEN or not CHAT_ID:
         print("TOKEN veya CHAT_ID eksik!")
         return
