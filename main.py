@@ -81,8 +81,18 @@ def send_daily_message():
 
     msg += "🎥 İçerik Fikri: 'Hangisi sizin favoriniz?' başlığıyla carousel Reels paylaş!"
 
-  if now.minute % 1 == 0:  # Her dakika test eder
+while True:
+    now = datetime.datetime.now()
+    if now.minute == 8 and now.second == 0:
+        send_daily_message()
+        time.sleep(60)
+    else:
+        time.sleep(20)
 
 keep_alive()
 send_daily_message()
+# GÜNLÜK Trend Mesajı Gönderimi
+send_daily_message()
+
+
 
